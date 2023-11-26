@@ -121,7 +121,7 @@ def modif2(file_name,ttfile,n,dg,sal,cnf):
                 newbs = sal
                 while not newdes.isalpha() or not newbs.isdigit():
                     print('Please enter proper Designation and Basic Salary')
-                    return
+                    exit(0)
                 print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
                 ch = cnf
                 if ch == 'Y' or ch == 'y':
@@ -137,7 +137,6 @@ def modif2(file_name,ttfile,n,dg,sal,cnf):
         if found == 1:
             remove(file_name)
             rename(ttfile, file_name)
-
 
 # Modification in Gender
 def modif3():
