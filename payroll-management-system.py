@@ -88,9 +88,9 @@ def addrec():
     
 # Modification of existing records in Employee File except Employee Number and Employee Name
 
-
-def modif1(filename):
-    fin = open(filename, 'r')
+# Modification in Basic Salary
+def modif1(file_name):
+    fin = open(file_name, 'r')
     fout = open('temporary.txt', 'w')
     desig = input('Designation to change Basic Salary? ')
     inc = int(input('Amount by which Basic Salary to be increased? '))
@@ -100,25 +100,23 @@ def modif1(filename):
         arr = data.split(',')
         if arr[5] == desig.upper():
             found = 1
-            arr[6] = str(int(arr[6]) + inc)
-            rec = (',').join(arr)
-            fout.write(rec + '\n')
+            print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
+            ch = input('Enter your Choice [Y/y or N/n] ')
+            if ch == 'Y' or ch == 'y':
+                arr[6] = str(int(arr[6]) + inc)
+                print('BASIC SALARY UPDATED SUCCESSFULLY!\n')
+            else:
+                print('BASIC SALARY NOT UPDATED!\n')
+        rec = (',').join(arr)
+        fout.write(rec + '\n')
+    if found == 0:
+        print('\nERROR: DESIGNATION NOT FOUND!\n')
     fin.close()
     fout.close()
     if found == 1:
-        print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
-        ch = input('Enter your Choice [Y/y or N/n] ')
-        if ch == 'Y' or ch == 'y':            
-            print('BASIC SALARY UPDATED SUCCESSFULLY!\n')
-            try:
-                remove(filename)
-                rename('temporary.txt', filename)
-            except Exception as e:
-                print(f'Error: {e}')
-        else:
-            print('BASIC SALARY NOT UPDATED!\n')
-    else:
-        print('\nERROR: DESIGNATION NOT FOUND!\n')
+        remove('employee_file.txt')
+        rename('temporary.txt', 'employee_file.txt')
+
 # Modification in Designation
 def modif2():
     fin = open('employee_file.txt', 'r')
@@ -692,7 +690,7 @@ while True:
     print('''Main Menu:
 1. Addition of New Employee records in Employee File
 2. Addition of Employee Pay File records in Monthly Pay File
-3. Modification in existing records
+3. 1ication in existing records
 4. Search for Employee records
 5. Delete existing Employee records
 6. Display files
@@ -716,10 +714,11 @@ while True:
 7. Modify Mobile Number
 8. Modify Address
 0. Exit Modification Menu\n''')
-        a = int(input('Choice[0-8]? '))
+        
         while True:
+            a = int(input('Choice[0-8]? '))
             if a == 1:
-                modif1('employee_file.txt')
+                modif1("employee_file.txt")
             elif a == 2:
                 modif2()
             elif a == 3:
