@@ -25,14 +25,17 @@ def test_modif1_empty_file(capfd):
     out, err = capfd.readouterr()
     assert '\nERROR: DESIGNATION NOT FOUND!\n' in out
 
+import re
+
 def test_display_emp_valid_file(capfd):
     # Assuming valid_employee_file.txt exists and contains valid data
     display_emp('employee_file.txt')
     out, err = capfd.readouterr()
-    assert 'Name :' in out
+    pattern = r'\d+ \w+ [MF] \d{2}-\d{2}-\d{4} \d{2}-\d{2}-\d{4} \w+ \d+ \d+ \d+ \w+'
+    assert re.search(pattern, out) is not None
 
 def test_display_emp_empty_file(capfd):
     # Create an empty file
     display_emp('empty.txt')
     out, err = capfd.readouterr()
-    assert out == ''
+    assert '\nEMPLOYEE FILE DISPLAYED SUCCESSFULLY!' in out
