@@ -89,11 +89,11 @@ def addrec():
 # Modification of existing records in Employee File except Employee Number and Employee Name
 
 # Modification in Basic Salary
-def modif1(file_name):
+def modif1(file_name,ttfile,d,i,c):
     fin = open(file_name, 'r')
-    fout = open('temporary.txt', 'w')
-    desig = input('Designation to change Basic Salary? ')
-    inc = int(input('Amount by which Basic Salary to be increased? '))
+    fout = open(ttfile , 'w')
+    desig = d
+    inc = i
     found = 0
     for data in fin:
         data = data.strip()
@@ -101,7 +101,7 @@ def modif1(file_name):
         if arr[5] == desig.upper():
             found = 1
             print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
-            ch = input('Enter your Choice [Y/y or N/n] ')
+            ch = c
             if ch == 'Y' or ch == 'y':
                 arr[6] = str(int(arr[6]) + inc)
                 print('BASIC SALARY UPDATED SUCCESSFULLY!\n')
