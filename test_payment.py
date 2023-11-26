@@ -17,6 +17,10 @@ def test_modif1_no(capfd):
 
 def test_modif1_not_found(capfd):
     modif1('employee_file.txt', 'temporary.txt', 'Nonexistent', 1000, 'Y')
+    out, err = capfd.readouterr()
+    assert '\nERROR: DESIGNATION NOT FOUND!\n' in out
 
+def test_modif1_empty_file(capfd):
+    modif1('empty.txt', 'temporary.txt', 'Nonexistent', 1000, 'Y')
     out, err = capfd.readouterr()
     assert '\nERROR: DESIGNATION NOT FOUND!\n' in out
