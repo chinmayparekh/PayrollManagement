@@ -1,84 +1,76 @@
 from os import remove, rename
     # Addition of records for New Employees in Employee File
-def addrec(file_name,n,emp):
+def addrec(file_name,n,name,g,dy,mn,yr,dg,sal,phone,mbn,ads):
     p = []
     no = empcode()    
     fout = open(file_name, 'a')
+    count=0
     for no in range(n):
         no = no + 1
         while True:
             # Input Employee Name
-            na = input('Employee Name? ')
+            na = name[count]
             if not na.isalnum() or na.isdigit():
                 print('Please enter proper Employee Name')
-                na = input('Employee Name? ')
+                return
             elif na.isalpha() and len(na) <= 2 :
                 print('Please enter proper Employee Name')
-                na = input('Employee Name? ')
+                return
             else:
                 break
         # Input Employee Gender
-        gender = input('Gender [F/M]? ')
+        gender = g[count]
         while True:
             if not gender.isalpha():
                 print('Please enter Gender as either F- Female or M- Male')
-                gender = input('Gender [F/M]? ')
+                return
             elif gender.isalpha() and len(gender) != 1 :
                 print('Please enter Gender as either F- Female or M- Male')
-                gender = input('Gender [F/M]? ')
+                return
             elif gender.upper() != 'F' and gender.upper() != 'M' :
                 print('Please enter Gender as either F- Female or M- Male')
-                gender = input('Gender [F/M]? ')
+                return
             else:
                 break
         # Input Date of Birth details
         print('Enter Employee Date of Birth details')
-        dob = dateval()
-        while len(dob) != 10:
+        dob = dateval(dy[count],mn[count],yr[count])
+        if len(dob) != 10:
             print(dob)
             print('Please enter Correct Date of Birth')
-            dob = dateval()
+            return
         # Input Date of Joining details
         print('Enter Employee Date of Joining details')
         doj = dateval()
-        while len(doj) != 10:
+        if len(doj) != 10:
             print(doj)
             print('Please enter Correct Date of Joining')
-            doj = dateval()
+            return
         # Input the Employee's Designation
-        des = input('Employee Designation? ')
+        des = dg[count]
         # Input Basic Salary
-        bs = input('Basic Salary? ')
+        bs = sal[count]
         # Input the Employee's Phone number
-        pn = input('Phone Number? ')
-        validphone = phonevalidate(pn)
+        pn = phone[count]
+        validphone = phonevalidate(pn,file_name)
         if len(pn) == 10:
-            while validphone == 1:
+            if validphone == 1:
                 print('Please enter New Phone Number as it already exists')
-                pn = input('Phone Number? ')
-                validphone = phonevalidate(pn)
+                return
             while True:
                 if pn in p:
                     print('Please enter New Phone Number as it already exists')
-                    pn = input('Phone Number? ')
+                    return
                 else:
                     p += [pn]
                     break
         else:
             print('Please enter New Phone Number with 10 digits')
-            pn = input('Phone Number? ')
-            validphone = phonevalidate(pn)
-            while True:
-                if pn in p:
-                    print('Please enter New Phone Number as it already exists')
-                    pn = input('Phone Number? ')
-                else:
-                    p += [pn]
-                    break
+            return
         # Input the Employee's Mobile number                
-        mob = input('Mobile Number? ')
+        mob = mbn[count]
         # Input the Employee's Address
-        add = input('Address? ')
+        add = ads[count]
 
         data = str(no) +  ',' +  na.upper() +  ',' +  gender.upper() +  ',' +  dob +  ',' +  doj +  ',' +  des.upper() +  ',' +  bs +  ',' +  str(pn) +  ',' +  mob +  ',' +  add.upper() +  '\n'
         fout.write(data)
@@ -556,8 +548,8 @@ def delete():
     rename('temporary.txt','employee_file.txt')
 
 # Displaying Employee File   
-def display_emp():
-    fin = open('employee_file.txt','r')
+def display_emp(file_name):
+    fin = open(file_name,'r')
     print('\n')
     print(70 * "*", " EMPLOYEE PAY FILE ", 69 * "*")
     print(160 * '-')
@@ -615,13 +607,13 @@ def empcode():
     return(code)
 
 # Validation for inputted date
-def dateval():
+def dateval(day,month,year):
     # Input Day
-    d = int(input('Day? '))
+    d = day
     # Input Month
-    m = int(input('Month? '))
+    m = month
     # Input Year
-    y = int(input('Year? '))
+    y = year
     maxd = 0
     if m in [1, 3, 5, 7, 8, 9, 10, 12]:
         maxd = 31
@@ -646,8 +638,8 @@ def dateval():
         return (str(d) + '-' + str(m) + '-' + str(y))
 
 # Validation for Phone Number
-def phonevalidate(n):
-    fin = open('employee_file.txt','r')
+def phonevalidate(n,file_name):
+    fin = open(file_name,'r')
     fin.seek(0)
     found = 0
     for line in fin:
@@ -678,7 +670,19 @@ def main():
     0. Exit Main Menu\n''')
         if ch == 1:
             n = int(input('Number of Employees to be added? '))
-            addrec()
+            n = 1
+            name = ['John']
+            g = ['M']
+            dy = [1]
+            mn = [1]
+            yr = [1990]
+            dg = ['Manager']
+            sal = [5000]
+            phone = ['1234567890']
+            mbn = ['0987654321']
+            ads = ['123 Main St']
+
+            addrec('employee_file.txt', n, name, g, dy, mn, yr, dg, sal, phone, mbn, ads)
         elif ch == 2:
             mpayfile()
         elif ch == 3:
@@ -739,7 +743,7 @@ def main():
     0. Exit Display Menu\n''')
             a = int(input('Choice[0-2]? '))
             if a == 1:
-                display_emp()
+                display_emp("employee_file.txt")
             elif a == 2:
                 display_mon()
             elif ch == 0:
