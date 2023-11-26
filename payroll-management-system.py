@@ -88,13 +88,11 @@ def addrec():
     
 # Modification of existing records in Employee File except Employee Number and Employee Name
 
-# Modification in Basic Salary
-def modif1():
-    fin = open('employee_file.txt', 'r')
+
+def modif1(filename):
+    fin = open(filename, 'r')
     fout = open('temporary.txt', 'w')
-    # Input Employee's Designation
     desig = input('Designation to change Basic Salary? ')
-    # Input amount by which Basic Salary has to be increased
     inc = int(input('Amount by which Basic Salary to be increased? '))
     found = 0
     for data in fin:
@@ -103,21 +101,24 @@ def modif1():
         if arr[5] == desig.upper():
             found = 1
             arr[6] = str(int(arr[6]) + inc)
+            rec = (',').join(arr)
+            fout.write(rec + '\n')
+    fin.close()
+    fout.close()
+    if found == 1:
         print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
         ch = input('Enter your Choice [Y/y or N/n] ')
         if ch == 'Y' or ch == 'y':            
             print('BASIC SALARY UPDATED SUCCESSFULLY!\n')
+            try:
+                remove(filename)
+                rename('temporary.txt', filename)
+            except Exception as e:
+                print(f'Error: {e}')
         else:
             print('BASIC SALARY NOT UPDATED!\n')
-        rec = (',').join(arr)
-        fout.write(rec + '\n')
-    if found == 0:
+    else:
         print('\nERROR: DESIGNATION NOT FOUND!\n')
-    fin.close()
-    fout.close()
-    remove('employee_file.txt')
-    rename('temporary.txt', 'employee_file.txt')
-
 # Modification in Designation
 def modif2():
     fin = open('employee_file.txt', 'r')
@@ -718,7 +719,7 @@ while True:
         a = int(input('Choice[0-8]? '))
         while True:
             if a == 1:
-                modif1()
+                modif1('employee_file.txt')
             elif a == 2:
                 modif2()
             elif a == 3:
