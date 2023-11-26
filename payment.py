@@ -105,10 +105,10 @@ def modif1(file_name,ttfile,d,i,c):
     if found == 1:
         remove('employee_file.txt')
         rename('temporary.txt', 'employee_file.txt')
-def modif2(file_name,ttfile):
+def modif2(file_name,ttfile,n,dg,sal,cnf):
         fin = open(file_name, 'r')
         fout = open(ttfile, 'w')
-        no = input('Employee Number to change Designation? ')
+        no = n
         found = 0
         for data in fin:
             data = data.strip()
@@ -117,14 +117,13 @@ def modif2(file_name,ttfile):
                 found = 1
                 print('Name :', arr[1])
                 print('Designation:', arr[5], '\t\t', 'Basic Salary :', arr[6])
-                newdes = input('New Designation? ')
-                newbs = input('New Basic Salary? ')
+                newdes = dg
+                newbs = sal
                 while not newdes.isalpha() or not newbs.isdigit():
                     print('Please enter proper Designation and Basic Salary')
-                    newdes = input('New Designation? ')
-                    newbs = input('New Basic Salary? ')
+                    return
                 print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
-                ch = input('Enter your Choice [Y/y or N/n]? ')
+                ch = cnf
                 if ch == 'Y' or ch == 'y':
                     arr[5] = newdes.upper()
                     arr[6] = newbs
@@ -137,7 +136,7 @@ def modif2(file_name,ttfile):
         fout.close()
         if found == 1:
             remove(file_name)
-            rename('temporary.txt', file_name)
+            rename(ttfile, file_name)
 
 
 # Modification in Gender
@@ -703,7 +702,7 @@ def main():
                     modif1('employee_file.txt', 'temporary.txt', 'Manager', 1000, 'Y')
                     a=0
                 elif a == 2:
-                    modif2("employee_file.txt")
+                    modif2('employee_file.txt', 'temporary.txt', 1, 'Director', '6000', 'Y')
                 elif a == 3:
                     modif3()
                 elif a == 4:
