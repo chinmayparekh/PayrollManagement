@@ -1,5 +1,5 @@
 import pytest
-from payment import modif1
+from payment import modif1,display_emp
 
 def test_modif1_yes(capfd):
     modif1('employee_file.txt', 'temporary.txt', 'Manager', 1000, 'Y')
@@ -24,3 +24,15 @@ def test_modif1_empty_file(capfd):
     modif1('empty.txt', 'temporary.txt', 'Nonexistent', 1000, 'Y')
     out, err = capfd.readouterr()
     assert '\nERROR: DESIGNATION NOT FOUND!\n' in out
+
+def test_display_emp_valid_file(capfd):
+    # Assuming valid_employee_file.txt exists and contains valid data
+    display_emp('employee_file.txt')
+    out, err = capfd.readouterr()
+    assert 'Name :' in out
+
+def test_display_emp_empty_file(capfd):
+    # Create an empty file
+    display_emp('empty.txt')
+    out, err = capfd.readouterr()
+    assert out == ''
