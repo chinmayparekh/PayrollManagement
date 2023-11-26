@@ -1,9 +1,9 @@
 from os import remove, rename
     # Addition of records for New Employees in Employee File
-def addrec():
+def addrec(file_name,n,emp):
     p = []
     no = empcode()    
-    fout = open('employee_file.txt', 'a')
+    fout = open(file_name, 'a')
     for no in range(n):
         no = no + 1
         while True:
