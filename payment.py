@@ -1,4 +1,90 @@
 from os import remove, rename
+    # Addition of records for New Employees in Employee File
+def addrec():
+    p = []
+    no = empcode()    
+    fout = open('employee_file.txt', 'a')
+    for no in range(n):
+        no = no + 1
+        while True:
+            # Input Employee Name
+            na = input('Employee Name? ')
+            if not na.isalnum() or na.isdigit():
+                print('Please enter proper Employee Name')
+                na = input('Employee Name? ')
+            elif na.isalpha() and len(na) <= 2 :
+                print('Please enter proper Employee Name')
+                na = input('Employee Name? ')
+            else:
+                break
+        # Input Employee Gender
+        gender = input('Gender [F/M]? ')
+        while True:
+            if not gender.isalpha():
+                print('Please enter Gender as either F- Female or M- Male')
+                gender = input('Gender [F/M]? ')
+            elif gender.isalpha() and len(gender) != 1 :
+                print('Please enter Gender as either F- Female or M- Male')
+                gender = input('Gender [F/M]? ')
+            elif gender.upper() != 'F' and gender.upper() != 'M' :
+                print('Please enter Gender as either F- Female or M- Male')
+                gender = input('Gender [F/M]? ')
+            else:
+                break
+        # Input Date of Birth details
+        print('Enter Employee Date of Birth details')
+        dob = dateval()
+        while len(dob) != 10:
+            print(dob)
+            print('Please enter Correct Date of Birth')
+            dob = dateval()
+        # Input Date of Joining details
+        print('Enter Employee Date of Joining details')
+        doj = dateval()
+        while len(doj) != 10:
+            print(doj)
+            print('Please enter Correct Date of Joining')
+            doj = dateval()
+        # Input the Employee's Designation
+        des = input('Employee Designation? ')
+        # Input Basic Salary
+        bs = input('Basic Salary? ')
+        # Input the Employee's Phone number
+        pn = input('Phone Number? ')
+        validphone = phonevalidate(pn)
+        if len(pn) == 10:
+            while validphone == 1:
+                print('Please enter New Phone Number as it already exists')
+                pn = input('Phone Number? ')
+                validphone = phonevalidate(pn)
+            while True:
+                if pn in p:
+                    print('Please enter New Phone Number as it already exists')
+                    pn = input('Phone Number? ')
+                else:
+                    p += [pn]
+                    break
+        else:
+            print('Please enter New Phone Number with 10 digits')
+            pn = input('Phone Number? ')
+            validphone = phonevalidate(pn)
+            while True:
+                if pn in p:
+                    print('Please enter New Phone Number as it already exists')
+                    pn = input('Phone Number? ')
+                else:
+                    p += [pn]
+                    break
+        # Input the Employee's Mobile number                
+        mob = input('Mobile Number? ')
+        # Input the Employee's Address
+        add = input('Address? ')
+
+        data = str(no) +  ',' +  na.upper() +  ',' +  gender.upper() +  ',' +  dob +  ',' +  doj +  ',' +  des.upper() +  ',' +  bs +  ',' +  str(pn) +  ',' +  mob +  ',' +  add.upper() +  '\n'
+        fout.write(data)
+    print('\nEMPLOYEE RECORDS ADDED SUCCESSFULLY!\n')
+    fout.close()
+
 # Modification in Basic Salary
 def modif1(file_name,ttfile,d,i,c):
     fin = open(file_name, 'r')
@@ -27,102 +113,9 @@ def modif1(file_name,ttfile,d,i,c):
     if found == 1:
         remove('employee_file.txt')
         rename('temporary.txt', 'employee_file.txt')
-def main():
-    
-
-    # Addition of records for New Employees in Employee File
-    def addrec():
-        p = []
-        no = empcode()    
-        fout = open('employee_file.txt', 'a')
-        for no in range(n):
-            no = no + 1
-            while True:
-                # Input Employee Name
-                na = input('Employee Name? ')
-                if not na.isalnum() or na.isdigit():
-                    print('Please enter proper Employee Name')
-                    na = input('Employee Name? ')
-                elif na.isalpha() and len(na) <= 2 :
-                    print('Please enter proper Employee Name')
-                    na = input('Employee Name? ')
-                else:
-                    break
-            # Input Employee Gender
-            gender = input('Gender [F/M]? ')
-            while True:
-                if not gender.isalpha():
-                    print('Please enter Gender as either F- Female or M- Male')
-                    gender = input('Gender [F/M]? ')
-                elif gender.isalpha() and len(gender) != 1 :
-                    print('Please enter Gender as either F- Female or M- Male')
-                    gender = input('Gender [F/M]? ')
-                elif gender.upper() != 'F' and gender.upper() != 'M' :
-                    print('Please enter Gender as either F- Female or M- Male')
-                    gender = input('Gender [F/M]? ')
-                else:
-                    break
-            # Input Date of Birth details
-            print('Enter Employee Date of Birth details')
-            dob = dateval()
-            while len(dob) != 10:
-                print(dob)
-                print('Please enter Correct Date of Birth')
-                dob = dateval()
-            # Input Date of Joining details
-            print('Enter Employee Date of Joining details')
-            doj = dateval()
-            while len(doj) != 10:
-                print(doj)
-                print('Please enter Correct Date of Joining')
-                doj = dateval()
-            # Input the Employee's Designation
-            des = input('Employee Designation? ')
-            # Input Basic Salary
-            bs = input('Basic Salary? ')
-            # Input the Employee's Phone number
-            pn = input('Phone Number? ')
-            validphone = phonevalidate(pn)
-            if len(pn) == 10:
-                while validphone == 1:
-                    print('Please enter New Phone Number as it already exists')
-                    pn = input('Phone Number? ')
-                    validphone = phonevalidate(pn)
-                while True:
-                    if pn in p:
-                        print('Please enter New Phone Number as it already exists')
-                        pn = input('Phone Number? ')
-                    else:
-                        p += [pn]
-                        break
-            else:
-                print('Please enter New Phone Number with 10 digits')
-                pn = input('Phone Number? ')
-                validphone = phonevalidate(pn)
-                while True:
-                    if pn in p:
-                        print('Please enter New Phone Number as it already exists')
-                        pn = input('Phone Number? ')
-                    else:
-                        p += [pn]
-                        break
-            # Input the Employee's Mobile number                
-            mob = input('Mobile Number? ')
-            # Input the Employee's Address
-            add = input('Address? ')
-
-            data = str(no) +  ',' +  na.upper() +  ',' +  gender.upper() +  ',' +  dob +  ',' +  doj +  ',' +  des.upper() +  ',' +  bs +  ',' +  str(pn) +  ',' +  mob +  ',' +  add.upper() +  '\n'
-            fout.write(data)
-        print('\nEMPLOYEE RECORDS ADDED SUCCESSFULLY!\n')
-        fout.close()
-
-    # Modification of existing records in Employee File except Employee Number and Employee Name
-
-    
-    # Modification in Designation
-    def modif2(file_name):
+def modif2(file_name,ttfile):
         fin = open(file_name, 'r')
-        fout = open('temporary.txt', 'w')
+        fout = open(ttfile, 'w')
         no = input('Employee Number to change Designation? ')
         found = 0
         for data in fin:
@@ -155,520 +148,521 @@ def main():
             rename('temporary.txt', file_name)
 
 
-    # Modification in Gender
-    def modif3():
-        fin = open('employee_file.txt', 'r')
-        fout = open('temporary.txt', 'w')
-        no = input('Employee Number to change Gender? ')
-        found = 0
-        for data in fin:
-            data = data.strip()
-            arr = data.split(',')
-            if int(arr[0]) == int(no):
-                found = 1
-                print('Name :', arr[1])
-                print('Gender:', arr[2])
+# Modification in Gender
+def modif3():
+    fin = open('employee_file.txt', 'r')
+    fout = open('temporary.txt', 'w')
+    no = input('Employee Number to change Gender? ')
+    found = 0
+    for data in fin:
+        data = data.strip()
+        arr = data.split(',')
+        if int(arr[0]) == int(no):
+            found = 1
+            print('Name :', arr[1])
+            print('Gender:', arr[2])
+            gender = input('Gender [F/M]? ')
+            while gender.upper() != 'F' and gender.upper() != 'M':
+                print('Please enter Gender as either F- Female or M- Male')
                 gender = input('Gender [F/M]? ')
-                while gender.upper() != 'F' and gender.upper() != 'M':
-                    print('Please enter Gender as either F- Female or M- Male')
-                    gender = input('Gender [F/M]? ')
-                print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
-                ch = input('Enter your Choice [Y/y or N/n]? ')
-                if ch == 'Y' or ch == 'y':
-                    arr[2] = gender.upper()
-                    print('GENDER UPDATED!\n')
-            rec = (',').join(arr)
-            fout.write(rec  + '\n')
-        if found == 0:
-            print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
-        fin.close()
-        fout.close()
-        if found == 1:
-            remove('employee_file.txt')
-            rename('temporary.txt', 'employee_file.txt')
-
-    # Modification in Date of Birth
-    def modif4():
-        fin = open('employee_file.txt', 'r')
-        fout = open('temporary.txt', 'w')
-        # Input Employee Number
-        no = input('Employee Number to change Date of Birth? ')
-        found = 0
-        for data in fin:
-            data = data.strip()
-            arr = data.split(',')
-            if int(arr[0]) == no:
-                found = 1
-                print('Name :', arr[1])
-                print('Date of Birth:', arr[3])
-                print('Enter a Correct Data of Birth')
-                newdob = dateval()
-                while len(newdob) != 10:
-                    print(newdob)
-                    print('Please enter Correct Date of Birth')
-                    newdob = dateval()
-                print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
-                ch = input('Enter your Choice [Y/y or N/n]? ')
-                if ch == 'Y' or ch == 'y':
-                    arr[4] = newdob
-                    print('DATE OF BIRTH UPDATED SUCCESSFULLY!\n')
-                else:
-                    print('DATE OF BIRTH NOT UPDATED!\n')
-            rec = (',').join(arr)
-            fout.write(rec + '\n')
-        if found == 0:
-            print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
-        fin.close()
-        fout.close()
-        remove('employee_file.txt')
-        rename('temporary.txt', 'employee_file.txt')
-
-    # Modification in Date of Joining
-    def modif5():
-        fin = open('employee_file.txt', 'r')
-        fout = open('temporary.txt', 'w')
-        # Input Employee Number
-        no = int(input('Employee Number to change Date of Joining? '))
-        found = 0
-        for data in fin:
-            data = data.strip()
-            arr = data.split(',')
-            if int(arr[0]) == no:
-                found = 1
-                print('Name:', arr[1])
-                print('Date of Joining:', arr[4])
-                print('Enter a Correct Data of Joining')
-                newdoj = dateval()
-                while len(newdoj) != 10:
-                    print(newdoj)
-                    print('Please enter Correct Data of Joining')
-                    newdoj = dateval()
-                print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
-                ch = input('Enter your Choice [Y/y or N/n]? ')
-                if ch == 'Y' or ch == 'y':
-                    arr[5] = newdoj
-                    print('DATE OF JOINING UPDATED SUCCESSFULLY!\n')
-                else:
-                    print('DATE OF JOINING NOT UPDATED!\n')
-            rec = (',').join(arr)
-            fout.write(rec  + '\n')
-        if found == 0:
-            print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
-        fin.close()
-        fout.close()
-        remove('employee_file.txt')
-        rename('temporary.txt','employee_file.txt')
-
-    # Modification in Phone Number
-    def modif6():
-        fin = open('employee_file.txt', 'r')
-        fout = open('temporary.txt', 'w')
-        # Input Employee Number
-        no = int(input('Employee Number to change Phone Number? '))
-        # Input New Phone Number
-        newpn = input('New Phone Number? ')
-        found = 0
-        for data in fin:
-            data = data.strip()
-            arr = data.split(',')
-            if int(arr[0]) == no:
-                found = 1
-                print('Name :', arr[1])
-                print('Phone Number:', arr[7])
-                print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
-                ch = input('Enter your Choice [Y/y or N/n]? ')
-                if ch == 'Y' or ch == 'y':
-                    arr[7] = newpn
-                    print('Phone Number updated!\n')
-                else:
-                    print('Phone Number not updated!\n')
-            rec = (',').join(arr)
-            fout.write(rec + '\n')
-        if found == 0:
-            print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
-        fin.close()
-        fout.close()
-        remove('employee_file.txt')
-        rename('temporary.txt', 'employee_file.txt')
-
-    # Modification in Mobile Number
-    def modif7():
-        fin = open('employee_file.txt')
-        fout = open('temporary.txt', 'w')
-        # Input Employee Number
-        no = int(input('Employee Number to change Mobile Number? '))
-        # Input New Mobile Number
-        newmob = input('New Mobile Number? ')
-        found = 0
-        for data in fin:
-            data = data.strip()
-            arr = data.split(',')
-            if int(arr[0]) == no:
-                found = 1
-                print('Name :', arr[1])
-                print('Mobile Number:', arr[8])
-                print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
-                ch = input('Enter your Choice [Y/y or N/n]? ')
-                if ch == 'Y' or ch == 'y':
-                    arr[8] = newmob
-                    print('MOBILE NUMBER UPDATED SUCCESSFULLY!\n')
-                else:
-                    print('MOBILE NUMBER NOT UPDATED!\n')
-            rec = (',').join(arr)
-            fout.write(rec + '\n')
-        if found == 0:
-            print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
-        fin.close()
-        fout.close()
-        remove('employee_file.txt')
-        rename('temporary.txt', 'employee_file.txt')
-
-    # Modification in Address
-    def modif8():
-        fin = open('employee_file.txt')
-        fout = open('temporary.txt', 'w')
-        # Input Employee Number
-        no = int(input('Enter the Number for changing the Address- '))
-        # Input New Address
-        newadd = input('New address? ')
-        found = 0
-        for data in fin:
-            data = data.strip()
-            arr = data.split(',')
-            if int(arr[0]) == no:
-                found = 1
-                print('Name :', arr[1])
-                print('Address :', arr[9])
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
             if ch == 'Y' or ch == 'y':
-                arr[9] = newadd.upper()
-                print('ADDRESS UPDATED SUCCESSFULLY!\n')
-            else:
-                print('ADDRESS NOT UPDATED!\n')
-            rec = (',').join(arr)
-            fout.write(rec  + '\n')
-        if found == 0:
-            print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
-        fin.close()
-        fout.close()
+                arr[2] = gender.upper()
+                print('GENDER UPDATED!\n')
+        rec = (',').join(arr)
+        fout.write(rec  + '\n')
+    if found == 0:
+        print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
+    fin.close()
+    fout.close()
+    if found == 1:
         remove('employee_file.txt')
         rename('temporary.txt', 'employee_file.txt')
 
-    # Searching in Employee File using following fields: Employee Number and Employee Name
-
-    # Searching using Employee Number
-    def search1():
-        fout = open('employee_file.txt', 'r')
-        no = int(input('Employee Number? '))
-        found = 0
-        for line in fout:
-            line = line.strip()
-            arr = line.split(',')
-            if arr[0] == str(no):
-                found = 1
-                print(75 * '-')
-                print('Employee Number :', arr[0], '\t\t\t\tEmployee Name :', arr[1])
-                print('Gender :', arr[2], '\t\t\t\t\tDesignation :', arr[5])
-                print('Date of Birth :', arr[3], '\t\t\tDate of Joining :', arr[4])
-                print('Basic Salary : $'+ str(arr[6]))
-                print('Phone Number :', arr[7], '\t\t\tMobile Number :', arr[8])
-                print('Address :', arr[9])
-                print(75 * '-')
-        if found:
-            print('\nEMPLOYEE SUCCESSFULLY DISPLAYED!\n')
-        else:
-            print('\nEMPLOYEE RECORD NOT FOUND!\n')
-        fout.close()
-
-    # Searching using Employee Name
-    def search2():
-        fout = open('employee_file.txt', 'r')
-        na = input('Employee Name? ')
-        found = 0
-        for line in fout:
-            line = line.strip()
-            arr = line.split(',')
-            if arr[1] == na.upper():
-                found = 1
-                print(75 * '-')
-                print('Employee Number :', arr[0], '\t\t\t\tEmployee Name :', arr[1])
-                print('Gender :', arr[2], '\t\t\t\t\tDesignation :', arr[5])
-                print('Date of Birth :', arr[3], '\t\t\tDate of Joining :', arr[4])
-                print('Basic Salary : $'+ str(arr[6]))
-                print('Phone Number :', arr[7], '\t\t\tMobile Number :', arr[8])
-                print('Address :', arr[9])
-                print(75 * '-')
-        if found:
-            print('\nEMPLOYEE SUCCESSFULLY DISPLAYED!\n')
-        else:
-            print('\nEMPLOYEE RECORD NOT FOUND!\n')
-        fout.close()
-
-    # Input Number of days worked and other deductions of each Employee in Monthly Pay File
-    def mpayfile():
-        arr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-        m, y = 0, 1
-        maxdays_work = 0
-        while True:
-            if m not in [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12] and y < 2015 :
-                # Input Month
-                m = int(input('Month? '))
-                # Input Year
-                y = int(input('Year? '))
+# Modification in Date of Birth
+def modif4():
+    fin = open('employee_file.txt', 'r')
+    fout = open('temporary.txt', 'w')
+    # Input Employee Number
+    no = input('Employee Number to change Date of Birth? ')
+    found = 0
+    for data in fin:
+        data = data.strip()
+        arr = data.split(',')
+        if int(arr[0]) == no:
+            found = 1
+            print('Name :', arr[1])
+            print('Date of Birth:', arr[3])
+            print('Enter a Correct Data of Birth')
+            newdob = dateval()
+            while len(newdob) != 10:
+                print(newdob)
+                print('Please enter Correct Date of Birth')
+                newdob = dateval()
+            print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
+            ch = input('Enter your Choice [Y/y or N/n]? ')
+            if ch == 'Y' or ch == 'y':
+                arr[4] = newdob
+                print('DATE OF BIRTH UPDATED SUCCESSFULLY!\n')
             else:
-                break
-        if m in [1, 3, 5, 7, 8, 9, 10, 12]:
-            maxdays_work = 27
-        elif m in [4, 6, 9, 11]:
-            maxdays_work = 26
-        elif m == 2:
-            if y % 4 == 0 and y % 100 != 0 or y % 400 == 0:
-                maxdays_work = 25
+                print('DATE OF BIRTH NOT UPDATED!\n')
+        rec = (',').join(arr)
+        fout.write(rec + '\n')
+    if found == 0:
+        print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
+    fin.close()
+    fout.close()
+    remove('employee_file.txt')
+    rename('temporary.txt', 'employee_file.txt')
+
+# Modification in Date of Joining
+def modif5():
+    fin = open('employee_file.txt', 'r')
+    fout = open('temporary.txt', 'w')
+    # Input Employee Number
+    no = int(input('Employee Number to change Date of Joining? '))
+    found = 0
+    for data in fin:
+        data = data.strip()
+        arr = data.split(',')
+        if int(arr[0]) == no:
+            found = 1
+            print('Name:', arr[1])
+            print('Date of Joining:', arr[4])
+            print('Enter a Correct Data of Joining')
+            newdoj = dateval()
+            while len(newdoj) != 10:
+                print(newdoj)
+                print('Please enter Correct Data of Joining')
+                newdoj = dateval()
+            print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
+            ch = input('Enter your Choice [Y/y or N/n]? ')
+            if ch == 'Y' or ch == 'y':
+                arr[5] = newdoj
+                print('DATE OF JOINING UPDATED SUCCESSFULLY!\n')
             else:
-                maxdays_work = 24
-        file_name = 'Monthly_pay' + '_' + arr[m-1] + '_' + str(y) + '.txt'        
-        fout = open(file_name, 'a')
-        # Input Emplyee Number
-        no = input('Employee Number? ')
-        fin = open('employee_file.txt', 'r')
-        for line in fin:
-            line = line.strip()
-            arr = line.split(',')
-            if arr[0] == str(no):
-                print('Employee Name  :', arr[1])
-                act_basic = int(arr[6])
-                print('Basic  :', act_basic)
-                #Validation for Number of working days
-                #Calculation of Basic Salary
-                leaves = int(input('Number of leaves taken in the month? '))
-                if leaves >= 0 and leaves <= maxdays_work:
+                print('DATE OF JOINING NOT UPDATED!\n')
+        rec = (',').join(arr)
+        fout.write(rec  + '\n')
+    if found == 0:
+        print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
+    fin.close()
+    fout.close()
+    remove('employee_file.txt')
+    rename('temporary.txt','employee_file.txt')
+
+# Modification in Phone Number
+def modif6():
+    fin = open('employee_file.txt', 'r')
+    fout = open('temporary.txt', 'w')
+    # Input Employee Number
+    no = int(input('Employee Number to change Phone Number? '))
+    # Input New Phone Number
+    newpn = input('New Phone Number? ')
+    found = 0
+    for data in fin:
+        data = data.strip()
+        arr = data.split(',')
+        if int(arr[0]) == no:
+            found = 1
+            print('Name :', arr[1])
+            print('Phone Number:', arr[7])
+            print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
+            ch = input('Enter your Choice [Y/y or N/n]? ')
+            if ch == 'Y' or ch == 'y':
+                arr[7] = newpn
+                print('Phone Number updated!\n')
+            else:
+                print('Phone Number not updated!\n')
+        rec = (',').join(arr)
+        fout.write(rec + '\n')
+    if found == 0:
+        print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
+    fin.close()
+    fout.close()
+    remove('employee_file.txt')
+    rename('temporary.txt', 'employee_file.txt')
+
+# Modification in Mobile Number
+def modif7():
+    fin = open('employee_file.txt')
+    fout = open('temporary.txt', 'w')
+    # Input Employee Number
+    no = int(input('Employee Number to change Mobile Number? '))
+    # Input New Mobile Number
+    newmob = input('New Mobile Number? ')
+    found = 0
+    for data in fin:
+        data = data.strip()
+        arr = data.split(',')
+        if int(arr[0]) == no:
+            found = 1
+            print('Name :', arr[1])
+            print('Mobile Number:', arr[8])
+            print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
+            ch = input('Enter your Choice [Y/y or N/n]? ')
+            if ch == 'Y' or ch == 'y':
+                arr[8] = newmob
+                print('MOBILE NUMBER UPDATED SUCCESSFULLY!\n')
+            else:
+                print('MOBILE NUMBER NOT UPDATED!\n')
+        rec = (',').join(arr)
+        fout.write(rec + '\n')
+    if found == 0:
+        print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
+    fin.close()
+    fout.close()
+    remove('employee_file.txt')
+    rename('temporary.txt', 'employee_file.txt')
+
+# Modification in Address
+def modif8():
+    fin = open('employee_file.txt')
+    fout = open('temporary.txt', 'w')
+    # Input Employee Number
+    no = int(input('Enter the Number for changing the Address- '))
+    # Input New Address
+    newadd = input('New address? ')
+    found = 0
+    for data in fin:
+        data = data.strip()
+        arr = data.split(',')
+        if int(arr[0]) == no:
+            found = 1
+            print('Name :', arr[1])
+            print('Address :', arr[9])
+        print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
+        ch = input('Enter your Choice [Y/y or N/n]? ')
+        if ch == 'Y' or ch == 'y':
+            arr[9] = newadd.upper()
+            print('ADDRESS UPDATED SUCCESSFULLY!\n')
+        else:
+            print('ADDRESS NOT UPDATED!\n')
+        rec = (',').join(arr)
+        fout.write(rec  + '\n')
+    if found == 0:
+        print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
+    fin.close()
+    fout.close()
+    remove('employee_file.txt')
+    rename('temporary.txt', 'employee_file.txt')
+
+# Searching in Employee File using following fields: Employee Number and Employee Name
+
+# Searching using Employee Number
+def search1():
+    fout = open('employee_file.txt', 'r')
+    no = int(input('Employee Number? '))
+    found = 0
+    for line in fout:
+        line = line.strip()
+        arr = line.split(',')
+        if arr[0] == str(no):
+            found = 1
+            print(75 * '-')
+            print('Employee Number :', arr[0], '\t\t\t\tEmployee Name :', arr[1])
+            print('Gender :', arr[2], '\t\t\t\t\tDesignation :', arr[5])
+            print('Date of Birth :', arr[3], '\t\t\tDate of Joining :', arr[4])
+            print('Basic Salary : $'+ str(arr[6]))
+            print('Phone Number :', arr[7], '\t\t\tMobile Number :', arr[8])
+            print('Address :', arr[9])
+            print(75 * '-')
+    if found:
+        print('\nEMPLOYEE SUCCESSFULLY DISPLAYED!\n')
+    else:
+        print('\nEMPLOYEE RECORD NOT FOUND!\n')
+    fout.close()
+
+# Searching using Employee Name
+def search2():
+    fout = open('employee_file.txt', 'r')
+    na = input('Employee Name? ')
+    found = 0
+    for line in fout:
+        line = line.strip()
+        arr = line.split(',')
+        if arr[1] == na.upper():
+            found = 1
+            print(75 * '-')
+            print('Employee Number :', arr[0], '\t\t\t\tEmployee Name :', arr[1])
+            print('Gender :', arr[2], '\t\t\t\t\tDesignation :', arr[5])
+            print('Date of Birth :', arr[3], '\t\t\tDate of Joining :', arr[4])
+            print('Basic Salary : $'+ str(arr[6]))
+            print('Phone Number :', arr[7], '\t\t\tMobile Number :', arr[8])
+            print('Address :', arr[9])
+            print(75 * '-')
+    if found:
+        print('\nEMPLOYEE SUCCESSFULLY DISPLAYED!\n')
+    else:
+        print('\nEMPLOYEE RECORD NOT FOUND!\n')
+    fout.close()
+
+# Input Number of days worked and other deductions of each Employee in Monthly Pay File
+def mpayfile():
+    arr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    m, y = 0, 1
+    maxdays_work = 0
+    while True:
+        if m not in [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12] and y < 2015 :
+            # Input Month
+            m = int(input('Month? '))
+            # Input Year
+            y = int(input('Year? '))
+        else:
+            break
+    if m in [1, 3, 5, 7, 8, 9, 10, 12]:
+        maxdays_work = 27
+    elif m in [4, 6, 9, 11]:
+        maxdays_work = 26
+    elif m == 2:
+        if y % 4 == 0 and y % 100 != 0 or y % 400 == 0:
+            maxdays_work = 25
+        else:
+            maxdays_work = 24
+    file_name = 'Monthly_pay' + '_' + arr[m-1] + '_' + str(y) + '.txt'        
+    fout = open(file_name, 'a')
+    # Input Emplyee Number
+    no = input('Employee Number? ')
+    fin = open('employee_file.txt', 'r')
+    for line in fin:
+        line = line.strip()
+        arr = line.split(',')
+        if arr[0] == str(no):
+            print('Employee Name  :', arr[1])
+            act_basic = int(arr[6])
+            print('Basic  :', act_basic)
+            #Validation for Number of working days
+            #Calculation of Basic Salary
+            leaves = int(input('Number of leaves taken in the month? '))
+            if leaves >= 0 and leaves <= maxdays_work:
+                days = maxdays_work - leaves
+                mon_sal = (act_basic // maxdays_work) * days
+            else:
+                while leaves >= 0 and leaves <= maxdays_work:
+                    print('Please enter valid Number of leaves')
+                    leaves = int(input('Number of leaves taken in the month? '))
                     days = maxdays_work - leaves
-                    mon_sal = (act_basic // maxdays_work) * days
-                else:
-                    while leaves >= 0 and leaves <= maxdays_work:
-                        print('Please enter valid Number of leaves')
-                        leaves = int(input('Number of leaves taken in the month? '))
-                        days = maxdays_work - leaves
-                if days >= 0 and leaves <= days:
-                    mon_sal = (act_basic // maxdays_work) * days
-                    da = round(0.55 * mon_sal)
-                    hra = round(0.35 * mon_sal)
-                    conv = round(0.15 * mon_sal)
-                    gross = round(mon_sal + da + hra + conv)
-                    itax = round(0.05 * mon_sal)
-                    loan = round(0.1 * mon_sal)
-                    ded = round(itax + loan)
-                    net = round(gross - ded)
-                    print('\nBasic\tDA\tHRA\tConveyance\tGross\tItax\tLoan\tDeductions\tNet')
-                    print('-' * 90)
-                    print(str(mon_sal) +  '\t' +  str(da) +  '\t' +  str(hra) +  '\t' +  str(conv) +  '\t\t' +  str(gross) +  '\t' +  str(itax) +  '\t' +  str(loan) +  '\t' +  str(ded) +  '\t\t' +  str(net), '\n\nAdded in Monthly Pay File!\n')
-                    data = str(no) +  ',' +  arr[1].upper() + ',' +  arr[5].upper() +  ',' +  str(days) +  ',' +  str(mon_sal) +  ',' +  str(da) +  ',' +  str(hra) +  ',' +  str(conv) +  ',' +  str(gross) +  ',' +  str(itax) +  ',' +  str(loan) +  ',' +  str(net) +  '\n'
-                    fout.write(data)
-        fout.close()
+            if days >= 0 and leaves <= days:
+                mon_sal = (act_basic // maxdays_work) * days
+                da = round(0.55 * mon_sal)
+                hra = round(0.35 * mon_sal)
+                conv = round(0.15 * mon_sal)
+                gross = round(mon_sal + da + hra + conv)
+                itax = round(0.05 * mon_sal)
+                loan = round(0.1 * mon_sal)
+                ded = round(itax + loan)
+                net = round(gross - ded)
+                print('\nBasic\tDA\tHRA\tConveyance\tGross\tItax\tLoan\tDeductions\tNet')
+                print('-' * 90)
+                print(str(mon_sal) +  '\t' +  str(da) +  '\t' +  str(hra) +  '\t' +  str(conv) +  '\t\t' +  str(gross) +  '\t' +  str(itax) +  '\t' +  str(loan) +  '\t' +  str(ded) +  '\t\t' +  str(net), '\n\nAdded in Monthly Pay File!\n')
+                data = str(no) +  ',' +  arr[1].upper() + ',' +  arr[5].upper() +  ',' +  str(days) +  ',' +  str(mon_sal) +  ',' +  str(da) +  ',' +  str(hra) +  ',' +  str(conv) +  ',' +  str(gross) +  ',' +  str(itax) +  ',' +  str(loan) +  ',' +  str(net) +  '\n'
+                fout.write(data)
+    fout.close()
 
-    # Displaying Slary Statement
-    def sal_statement():
-        arr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-        a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        # Input Month
-        m = int(input('Month? '))
-        # Input Year
-        y = int(input('Year? '))
+# Displaying Slary Statement
+def sal_statement():
+    arr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    # Input Month
+    m = int(input('Month? '))
+    # Input Year
+    y = int(input('Year? '))
+    print('\n')
+    print('*' * 36, ' XYZ COMPANY ', '*' * 36, '\n')
+    print('Salary Statement for the month of:', a[m - 1], str(y))
+    print(87 * '-')
+    print('ENO\t NAME\t\t DESIGNATION\t BASIC\t GROSS\t DEDUCTIONS\t NET')
+    print(87 * '-')
+    file_name = 'Monthly_pay' + '_' + arr[m - 1] + '_' + str(y) + '.txt' 
+    try: 
+        with open(file_name, 'r') as fin:
+            for line in fin:
+                line = line.strip()
+                arr = line.split(',')
+                ded = int(arr[9]) +  int(arr[10])
+                print(arr[0], '\t', arr[1], '\t', arr[2], '\t', arr[4], '\t', arr[8], '\t', ded, '\t\t', arr[11])
+        print(87 * '-')
+        print('\nSALARY STATEMENT DISPLAYED SUCCESSFULLY!\n')
+    except:
+        print("\nMONTHLY PAY FILE FOR", a[m - 1],str(y), "DOESN'T EXIST!\n")
+
+# Displaying Slary Slip
+def sal_slip():
+    arr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    # Input Month
+    m = int(input('Month? '))
+    # Input Year
+    y = int(input('Year? '))
+    # Input Employee Number
+    no = input('Employee Number to display Salary Slip? ')
+    file_name = 'Monthly_pay' + '_' + arr[m - 1] + '_' + str(y) + '.txt'
+    try: 
+        fout = open(file_name, 'r')
         print('\n')
         print('*' * 36, ' XYZ COMPANY ', '*' * 36, '\n')
-        print('Salary Statement for the month of:', a[m - 1], str(y))
-        print(87 * '-')
-        print('ENO\t NAME\t\t DESIGNATION\t BASIC\t GROSS\t DEDUCTIONS\t NET')
-        print(87 * '-')
-        file_name = 'Monthly_pay' + '_' + arr[m - 1] + '_' + str(y) + '.txt' 
-        try: 
-            with open(file_name, 'r') as fin:
-                for line in fin:
-                    line = line.strip()
-                    arr = line.split(',')
-                    ded = int(arr[9]) +  int(arr[10])
-                    print(arr[0], '\t', arr[1], '\t', arr[2], '\t', arr[4], '\t', arr[8], '\t', ded, '\t\t', arr[11])
-            print(87 * '-')
-            print('\nSALARY STATEMENT DISPLAYED SUCCESSFULLY!\n')
-        except:
-            print("\nMONTHLY PAY FILE FOR", a[m - 1],str(y), "DOESN'T EXIST!\n")
-
-    # Displaying Slary Slip
-    def sal_slip():
-        arr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-        a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        # Input Month
-        m = int(input('Month? '))
-        # Input Year
-        y = int(input('Year? '))
-        # Input Employee Number
-        no = input('Employee Number to display Salary Slip? ')
-        file_name = 'Monthly_pay' + '_' + arr[m - 1] + '_' + str(y) + '.txt'
-        try: 
-            fout = open(file_name, 'r')
-            print('\n')
-            print('*' * 36, ' XYZ COMPANY ', '*' * 36, '\n')
-            print('Salary Slip for the month of:', a[m - 1], str(y))
-            for line in fout:
-                line = line.strip()
-                arr = line.split(',')
-                if arr[0] == str(no):
-                    print(87 * '=')
-                    print('Employee Number :', arr[0] + '\t\t\t\t\tEmployee Name :', arr[1])
-                    print(87 * '-')
-                    print('Basic\t\t ' + '$' + arr[4] + '\t\t\t\t\tDeductions\t' + '$' + str(int(arr[9]) + int(arr[10])))
-                    print('DA\t\t', '$' + arr[5])
-                    print('HRA\t\t', '$' + arr[6])
-                    print('Conveyance\t', '$' + arr[7])
-                    print(87 * '-')
-                    print('Gross Pay\t' + ' $' + arr[8] + '\t\t\t\t\tNet\t\t' + '$' + arr[11])
-                    print(87 * '=')
-                    print("\n" + arr[1] + "'S SALARY SLIP FOR", a[m - 1], str(y), "DISPLAYED SUCCESSFULLY!\n")
-                    break
-            else:
-                print("EMPLOYEE NUMBER", no, "DOESN'T EXIST!\n")
-            fout.close()
-        except:
-            print("MONTHLY PAY FILE FOR", a[m - 1], str(y), "DOESN'T EXIST!\n")
-
-    # Delete Employee records
-    def delete():
-        fin = open('employee_file.txt', 'r')
-        fout = open('temporary.txt', 'a')
-        # Input Employee Number
-        no = int(input('Employee Number to delete? '))
-        # Input Employee Name
-        na = input('Employee Name to delete? ')
-        found = 0
-        for data in fin:
-            arr = data.split(',')
-            if int(arr[0]) == no and arr[1] == na.upper():
-                print('Name:', arr[1], '\t\t\t\t', 'Employee Number:', arr[0])
-                print('Designation:', arr[5], '\t\t\t', 'Basic Salary :', arr[6])
-                print('Date of Birth:', arr[3], '\t\t\t\t','Date of Joining:', arr[4])
-                print('Are you sure you want to delete?\n\tY/y for Yes or N/n for No')
-                ch = input('Enter your Choice [Y/y or N/n]? ')
-                if ch == 'Y' or ch == 'y':
-                    print('RECORD SUCCESSFULLY DELETED!\n')
-                else:
-                    print('RECORD NOT DELETED!\n')
-            else:
-                fout.write(data)
+        print('Salary Slip for the month of:', a[m - 1], str(y))
+        for line in fout:
+            line = line.strip()
+            arr = line.split(',')
+            if arr[0] == str(no):
+                print(87 * '=')
+                print('Employee Number :', arr[0] + '\t\t\t\t\tEmployee Name :', arr[1])
+                print(87 * '-')
+                print('Basic\t\t ' + '$' + arr[4] + '\t\t\t\t\tDeductions\t' + '$' + str(int(arr[9]) + int(arr[10])))
+                print('DA\t\t', '$' + arr[5])
+                print('HRA\t\t', '$' + arr[6])
+                print('Conveyance\t', '$' + arr[7])
+                print(87 * '-')
+                print('Gross Pay\t' + ' $' + arr[8] + '\t\t\t\t\tNet\t\t' + '$' + arr[11])
+                print(87 * '=')
+                print("\n" + arr[1] + "'S SALARY SLIP FOR", a[m - 1], str(y), "DISPLAYED SUCCESSFULLY!\n")
+                break
+        else:
+            print("EMPLOYEE NUMBER", no, "DOESN'T EXIST!\n")
         fout.close()
-        fin.close()
-        if found == 0:
-            print('\nERROR: RECORD NOT FOUND!\n')
-        remove('employee_file.txt')
-        rename('temporary.txt','employee_file.txt')
+    except:
+        print("MONTHLY PAY FILE FOR", a[m - 1], str(y), "DOESN'T EXIST!\n")
 
-    # Displaying Employee File   
-    def display_emp():
-        fin = open('employee_file.txt','r')
-        print('\n')
-        print(70 * "*", " EMPLOYEE PAY FILE ", 69 * "*")
-        print(160 * '-')
-        print('ENO  NAME\tGENDER DOB\t  DOJ\t     DESIGNATION\t\t      BASIC($)  PHONE       MOBILE      ADDRESS')
-        print(160 * '-')
+# Delete Employee records
+def delete():
+    fin = open('employee_file.txt', 'r')
+    fout = open('temporary.txt', 'a')
+    # Input Employee Number
+    no = int(input('Employee Number to delete? '))
+    # Input Employee Name
+    na = input('Employee Name to delete? ')
+    found = 0
+    for data in fin:
+        arr = data.split(',')
+        if int(arr[0]) == no and arr[1] == na.upper():
+            print('Name:', arr[1], '\t\t\t\t', 'Employee Number:', arr[0])
+            print('Designation:', arr[5], '\t\t\t', 'Basic Salary :', arr[6])
+            print('Date of Birth:', arr[3], '\t\t\t\t','Date of Joining:', arr[4])
+            print('Are you sure you want to delete?\n\tY/y for Yes or N/n for No')
+            ch = input('Enter your Choice [Y/y or N/n]? ')
+            if ch == 'Y' or ch == 'y':
+                print('RECORD SUCCESSFULLY DELETED!\n')
+            else:
+                print('RECORD NOT DELETED!\n')
+        else:
+            fout.write(data)
+    fout.close()
+    fin.close()
+    if found == 0:
+        print('\nERROR: RECORD NOT FOUND!\n')
+    remove('employee_file.txt')
+    rename('temporary.txt','employee_file.txt')
+
+# Displaying Employee File   
+def display_emp():
+    fin = open('employee_file.txt','r')
+    print('\n')
+    print(70 * "*", " EMPLOYEE PAY FILE ", 69 * "*")
+    print(160 * '-')
+    print('ENO  NAME\tGENDER DOB\t  DOJ\t     DESIGNATION\t\t      BASIC($)  PHONE       MOBILE      ADDRESS')
+    print(160 * '-')
+    for line in fin:
+        line = line.strip()
+        data = line.split(',')
+        eno, na, gen, dob, doj, desig, bs, pnum, mnum, add = int(data[0]), data[1], data[2], data[3], data[4], data[5], float(data[6]), int(data[7]), int(data[8]), data[9]
+        print('%i %-10s %s      %4s %s %-32s %-7.0f   %i  %i  %s'%(eno, na, gen, dob, doj, desig, bs, pnum, mnum, add))
+    print(160 * '-')
+    print('\nEMPLOYEE FILE DISPLAYED SUCCESSFULLY!')
+    fin.close()
+    print('\n')
+
+# Displaying Monthly Pay File
+def display_mon():
+    x = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    # Input Month
+    m = int(input('Month? '))
+    # Input Year
+    y = int(input('Year? '))
+    print('\n')
+    print('*' * 23,'\tMONTHLY PAY FILE (' +  x[m - 1] + '-', str(y) + ')\t', '*' * 22)
+    print(87 * '-')
+    print('ENO\t NAME\tDESIGNATION\t\t\tBASIC\t GROSS\t DEDUCTIONS\t NET')
+    print(87 * '-')
+    file_name = 'Monthly_pay' + '_' + x[m - 1] + '_' + str(y) + '.txt' 
+    try: 
+        fin = open(file_name, 'r')
         for line in fin:
             line = line.strip()
-            data = line.split(',')
-            eno, na, gen, dob, doj, desig, bs, pnum, mnum, add = int(data[0]), data[1], data[2], data[3], data[4], data[5], float(data[6]), int(data[7]), int(data[8]), data[9]
-            print('%i %-10s %s      %4s %s %-32s %-7.0f   %i  %i  %s'%(eno, na, gen, dob, doj, desig, bs, pnum, mnum, add))
-        print(160 * '-')
-        print('\nEMPLOYEE FILE DISPLAYED SUCCESSFULLY!')
-        fin.close()
-        print('\n')
-
-    # Displaying Monthly Pay File
-    def display_mon():
-        x = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-        a = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        # Input Month
-        m = int(input('Month? '))
-        # Input Year
-        y = int(input('Year? '))
-        print('\n')
-        print('*' * 23,'\tMONTHLY PAY FILE (' +  x[m - 1] + '-', str(y) + ')\t', '*' * 22)
+            arr = line.split(',')
+            ded = int(arr[9]) + int(arr[10])
+            print(arr[0], '\t', arr[1], '\t', arr[2], '\t', arr[4], '\t', arr[8], '\t', ded, '\t\t', arr[11])
         print(87 * '-')
-        print('ENO\t NAME\tDESIGNATION\t\t\tBASIC\t GROSS\t DEDUCTIONS\t NET')
-        print(87 * '-')
-        file_name = 'Monthly_pay' + '_' + x[m - 1] + '_' + str(y) + '.txt' 
-        try: 
-            fin = open(file_name, 'r')
-            for line in fin:
-                line = line.strip()
-                arr = line.split(',')
-                ded = int(arr[9]) + int(arr[10])
-                print(arr[0], '\t', arr[1], '\t', arr[2], '\t', arr[4], '\t', arr[8], '\t', ded, '\t\t', arr[11])
-            print(87 * '-')
-            print('\nMONTHLY PAY FILE FOR',a[m - 1],str(y),'DISPLAYED SUCCESSFULLY!\n') 
-        except:
-            print("\nERROR: MONTHLY PAY FILE FOR",a[m - 1],str(y),"DOESN'T EXIST!\n")
+        print('\nMONTHLY PAY FILE FOR',a[m - 1],str(y),'DISPLAYED SUCCESSFULLY!\n') 
+    except:
+        print("\nERROR: MONTHLY PAY FILE FOR",a[m - 1],str(y),"DOESN'T EXIST!\n")
 
-    # Automatic generation of Employee code       
-    def empcode():
-        code = 1000
-        fin = open('employee_file.txt', 'r')
-        fin.seek(0)
-        first_char = fin.read(1)
-        if not first_char:
-             code = 1000
-        else:
-            for line in fin:
-                line = line.strip()
-                rec = line.split(',')
-                code = int(rec[0])
-        return(code)
-
-    # Validation for inputted date
-    def dateval():
-        # Input Day
-        d = int(input('Day? '))
-        # Input Month
-        m = int(input('Month? '))
-        # Input Year
-        y = int(input('Year? '))
-        maxd = 0
-        if m in [1, 3, 5, 7, 8, 9, 10, 12]:
-            maxd = 31
-        elif m in [4, 6, 9, 11]:
-            maxd = 30
-        elif m == 2: 
-            if y % 4 == 0 and y % 100 != 0 or y % 400 == 0:
-                maxd = 29
-            else:
-                maxd = 28
-        if maxd == 0:
-            print('Please input valid Month')
-        elif d < 1 or d > maxd:
-            print('Please input valid Day')
-        elif y < 1950 and y > 2001:
-            print('Please input valid Year between 1950 and 2001')
-        else:
-            if len(str(m)) == 1:
-                m = '0' +  str(m)
-            if len(str(d)) == 1:
-                   d = '0' +  str(d)
-            return (str(d) + '-' + str(m) + '-' + str(y))
-
-    # Validation for Phone Number
-    def phonevalidate(n):
-        fin = open('employee_file.txt','r')
-        fin.seek(0)
-        found = 0
+# Automatic generation of Employee code       
+def empcode():
+    code = 1000
+    fin = open('employee_file.txt', 'r')
+    fin.seek(0)
+    first_char = fin.read(1)
+    if not first_char:
+            code = 1000
+    else:
         for line in fin:
             line = line.strip()
             rec = line.split(',')
-            ph = rec[7]
-            if ph == n:
-                found = 1
-                print('Same Phone Number found in records')
-                break
-        if len(fin.read()) == 0:
-            found = 0
-        return(found)
+            code = int(rec[0])
+    return(code)
 
+# Validation for inputted date
+def dateval():
+    # Input Day
+    d = int(input('Day? '))
+    # Input Month
+    m = int(input('Month? '))
+    # Input Year
+    y = int(input('Year? '))
+    maxd = 0
+    if m in [1, 3, 5, 7, 8, 9, 10, 12]:
+        maxd = 31
+    elif m in [4, 6, 9, 11]:
+        maxd = 30
+    elif m == 2: 
+        if y % 4 == 0 and y % 100 != 0 or y % 400 == 0:
+            maxd = 29
+        else:
+            maxd = 28
+    if maxd == 0:
+        print('Please input valid Month')
+    elif d < 1 or d > maxd:
+        print('Please input valid Day')
+    elif y < 1950 and y > 2001:
+        print('Please input valid Year between 1950 and 2001')
+    else:
+        if len(str(m)) == 1:
+            m = '0' +  str(m)
+        if len(str(d)) == 1:
+                d = '0' +  str(d)
+        return (str(d) + '-' + str(m) + '-' + str(y))
+
+# Validation for Phone Number
+def phonevalidate(n):
+    fin = open('employee_file.txt','r')
+    fin.seek(0)
+    found = 0
+    for line in fin:
+        line = line.strip()
+        rec = line.split(',')
+        ph = rec[7]
+        if ph == n:
+            found = 1
+            print('Same Phone Number found in records')
+            break
+    if len(fin.read()) == 0:
+        found = 0
+    return(found)
+
+def main():    
     # Menu
     while True:
         ch = int(input('Choice[0-8]? '))
