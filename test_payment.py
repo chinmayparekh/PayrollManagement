@@ -14,7 +14,7 @@ def test_modif1_yes(monkeypatch, capfd):
     modif1('test_employee_file.txt', 'test_temporary.txt')
 
     # Check the contents of the temporary file
-    with open('test_temporary.txt', 'r') as f:
+    with open('test_employee_file.txt', 'r') as f:
         data = f.read()
     assert '1,John,M,1990,2020,ENGINEER,10000,1234567890,9876543210,123 Street\n' in data
 
@@ -25,7 +25,6 @@ def test_modif1_yes(monkeypatch, capfd):
 
     # Clean up the test files
     os.remove('test_employee_file.txt')
-    os.remove('test_temporary.txt')
 
 def test_modif1_no(monkeypatch, capfd):
     # Mock the input function
@@ -40,7 +39,7 @@ def test_modif1_no(monkeypatch, capfd):
     modif1('test_employee_file.txt', 'test_temporary.txt')
 
     # Check the contents of the temporary file
-    with open('test_temporary.txt', 'r') as f:
+    with open('test_employee_file.txt', 'r') as f:
         data = f.read()
     assert '1,John,M,1990,2020,ENGINEER,5000,1234567890,9876543210,123 Street\n' in data
 
@@ -51,7 +50,6 @@ def test_modif1_no(monkeypatch, capfd):
 
     # Clean up the test files
     os.remove('test_employee_file.txt')
-    os.remove('test_temporary.txt')
 
 def test_modif1_not_found(monkeypatch, capfd):
     # Mock the input function
@@ -71,7 +69,6 @@ def test_modif1_not_found(monkeypatch, capfd):
 
     # Clean up the test files
     os.remove('test_employee_file.txt')
-    os.remove('test_temporary.txt')
 
 def test_modif1_empty_file(monkeypatch, capfd):
     # Mock the input function

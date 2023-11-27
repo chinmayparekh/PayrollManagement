@@ -111,8 +111,8 @@ def modif1(file_name,ttfile):
     fin.close()
     fout.close()
     if found == 1:
-        remove('employee_file.txt')
-        rename('temporary.txt', 'employee_file.txt')
+        remove(file_name)
+        rename(ttfile, file_name)
 def modif2(file_name,ttfile,n,dg,sal,cnf):
         fin = open(file_name, 'r')
         fout = open(ttfile, 'w')
