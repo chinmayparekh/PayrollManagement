@@ -669,17 +669,18 @@ def phonevalidate(n,file_name):
 def main():    
     # Menu
     while True:
-        ch = int(input('Choice[0-8]? '))
+        
         print('''Main Menu:
     1. Addition of New Employee records in Employee File
     2. Addition of Employee Pay File records in Monthly Pay File
-    3. 1ication in existing records
+    3. Modification in existing records
     4. Search for Employee records
     5. Delete existing Employee records
     6. Display files
     7. Print Salary Statement
     8. Print Salary Slip
     0. Exit Main Menu\n''')
+        ch = int(input('Choice[0-8]? '))
         if ch == 1:
             addrec('employee_file.txt')
         elif ch == 2:

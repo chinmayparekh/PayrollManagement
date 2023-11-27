@@ -51,19 +51,29 @@ It can be installed using the following command:
 
 ### Inference and Results(Add screenshots)
 
+The data flow graph of the entire program is as follows:
+![Alt text](payment.png)
 
-We ran test cases on the following functions to meet the test requirements which are as follows:
+It was not possible to test the entire code so we ran test cases on the following functions to meet the test requirements which are as follows:
 
-[modif1] (add link)
+![Alt text](modif1.png)
+[modif1](https://cs.gmu.edu:8443/offutt/coverage/DFGraphCoverage?edges=1+2%0D%0A2+3%0D%0A2+4%0D%0A3+5%0D%0A5+11%0D%0A5+16%0D%0A11+12%0D%0A12+13%0D%0A12+14%0D%0A13+12%0D%0A14+15%0D%0A14+16%0D%0A15+16%0D%0A16+2%0D%0A4+6%0D%0A4+7%0D%0A6+7%0D%0A7+8%0D%0A8+9%0D%0A9+10%0D%0A8+10%0D%0A&initialNode=1&endNode=10&defs=fin%201%0D%0Afout%201%0D%0Afilename%201%0D%0Ano%201%0D%0Afound%201%2011%0D%0Adata%203%0D%0Anewdes%2011%2013%2015%0D%0Anewbs%2011%2013%0D%0Ach%2014%0D%0A&uses=fin%202%203%207%0D%0Afout%207%2016%0D%0Afilename%209%0D%0Ano%205%0D%0Afound%204%208%0D%0Adata%203%0D%0Anewdes%2012%0D%0Anewbs%2012%2015%0D%0Ach%2014%0D%0A&action=All%20Def%20Coverage)
 
+![Alt text](modif2.png)
 [modif2](https://cs.gmu.edu:8443/offutt/coverage/DFGraphCoverage?edges=1+2%0D%0A2+3%0D%0A3+4%0D%0A4+5%0D%0A5+6%0D%0A6+7%0D%0A6+8%0D%0A8+9%0D%0A9+10%0D%0A10+11%0D%0A9+11%0D%0A11+2%0D%0A4+11%0D%0A2+12%0D%0A12+13%0D%0A12+14%0D%0A13+14%0D%0A14+15%0D%0A15+16%0D%0A14+16%0D%0A&initialNode=1&endNode=7+16&defs=fin%201%0D%0Afout%201%0D%0Ano%201%0D%0Adg%201%0D%0Asal%201%0D%0Afound%201%205%0D%0Adata%203%0D%0Anewdes%205%0D%0Anewbs%205%0D%0Ach%208%0D%0A&uses=fin%202%203%2014%0D%0Afout%2011%2014%0D%0Ano%204%0D%0Adg%205%0D%0Asal%205%0D%0Afound%2012%2014%0D%0Adata%203%0D%0Anewdes%206%2010%0D%0Anewbs%206%2010%0D%0Ach%209%0D%0A&action=All%20DU%20Path%20Coverage)
 
+![Alt text](modif3.png)
+[modif3](https://cs.gmu.edu:8443/offutt/coverage/DFGraphCoverage?edges=1+2%0D%0A2+3%0D%0A3+4%0D%0A2+12%0D%0A12+13%0D%0A12+14%0D%0A13+15%0D%0A14+15%0D%0A15+16%0D%0A15+17%0D%0A16+17%0D%0A4+5%0D%0A4+11%0D%0A11+2%0D%0A5+6%0D%0A6+7%0D%0A6+8%0D%0A7+8%0D%0A8+9%0D%0A9+10%0D%0A10+11%0D%0A9+11%0D%0A&initialNode=1&endNode=17&defs=fin%201%0D%0Afout%201%0D%0Ano%201%0D%0Afound%201%205%0D%0Adata%203%0D%0Agender%205%207%0D%0Ach%208%0D%0A&uses=fin%202%203%2014%0D%0Afout%2011%2014%0D%0Ano%204%0D%0Afound%2012%0D%0Adata%203%0D%0Agender%206%2010%0D%0Ach%209%0D%0A&action=All%20Def%20Coverage)
+
+![Alt text](modif4.png)
+
+![Alt text](display.png)
 [display](https://cs.gmu.edu:8443/offutt/coverage/DFGraphCoverage?edges=1+2%0D%0A2+3%0D%0A2+4%0D%0A3+5%0D%0A5+2%0D%0A&initialNode=1&endNode=4&defs=fin%201%0D%0Aeno%201%0D%0A&uses=fin%202%204%0D%0Aeno%205%0D%0A&action=All%20DU%20Path%20Coverage)
 
-
-
+We have written a total of 21 test cases to test the 5 functions.
+![Alt text](tests.png)
 ### Contributions
 
 Chinmay - Setup the various tools and libraries for testing the code, created the data flow graphs, test requirements and wrote half of the unit tests.
 
-Darshak - Wrote the base code and refactored it appropriately to make it suitable for testing and wrote half of the unit tests.
+Darshak - Wrote the base code and refactored it appropriately to make it suitable for testing,wrote half of the unit tests and prepared the report.
