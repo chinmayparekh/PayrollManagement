@@ -19,6 +19,13 @@ Graph-based testing(Data flow graphs) of source code which is a white box techni
 The Payroll Management System is a menu driven program where users can add records, remove records, modify records, delete records, or search records. The salary records (salary statement and salary slip) can also be displayed for all employees.
 The <code>employee_file.txt</code> is attached for reference and better understanding.
 
+To run the code:
+
+    python3 payment.py
+
+To run the testcases:
+
+    pytest -v    
 ### Steps Involved
 ![Alt text](dfg.png)
 
