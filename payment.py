@@ -35,22 +35,20 @@ def addrec(file_name):
                 break
         # Input Date of Birth details
         print('Enter Employee Date of Birth details')
-        dy = input('Enter day of birth: ')
-        mn = input('Enter month of birth: ')
-        yr = input('Enter year of birth: ')
+        dy = int(input('Enter day of birth: '))
+        mn = int(input('Enter month of birth: '))
+        yr = int(input('Enter year of birth: '))
         dob = dateval(dy, mn, yr)
-        if len(dob) != 10:
-            print(dob)
+        if dob == 0:
             print('Please enter Correct Date of Birth')
             continue
         # Input Date of Joining details
         print('Enter Employee Date of Joining details')
-        dy1 = input('Enter day of birth: ')
-        mn1 = input('Enter month of birth: ')
-        yr1 = input('Enter year of birth: ')
+        dy1 = int(input('Enter day of birth: '))
+        mn1 = int(input('Enter month of birth: '))
+        yr1 = int(input('Enter year of birth: '))
         doj = dateval(dy1, mn1, yr1)
-        if len(doj) != 10:
-            print(doj)
+        if doj == 0:
             print('Please enter Correct Date of Joining')
             continue
         # Input the Employee's Designation
@@ -94,7 +92,7 @@ def modif1(file_name,ttfile):
     for data in fin:
         data = data.strip()
         arr = data.split(',')
-        if arr[5] == desig.upper():
+        if arr[5].upper() == desig.upper():
             found = 1
             print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
@@ -193,18 +191,19 @@ def modif4(file_name,ttfile):
             print('Name :', arr[1])
             print('Date of Birth:', arr[3])
             print('Enter a Correct Data of Birth')
-            dn = input('Enter day of birth: ')
-            mn = input('Enter month of birth: ')
-            yr = input('Enter year of birth: ')
+            dn = int(input('Enter day of birth: '))
+            mn = int(input('Enter month of birth: '))
+            yr = int(input('Enter year of birth: '))
             newdob = dateval(dn,yr,mn)
-            while len(newdob) != 10:
-                print(newdob)
+            while newdob == 0:
                 print('Please enter Correct Date of Birth')
                 return
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
             if ch == 'Y' or ch == 'y':
-                arr[4] = newdob
+                arr[3] = newdob
+                rec = (',').join(arr)
+                print(rec)
                 print('DATE OF BIRTH UPDATED SUCCESSFULLY!\n')
             else:
                 print('DATE OF BIRTH NOT UPDATED!\n')
@@ -232,18 +231,17 @@ def modif5(file_name,ttfile):
             print('Name:', arr[1])
             print('Date of Joining:', arr[4])
             print('Enter a Correct Data of Joining')
-            dn = input('Enter day of birth: ')
-            mn = input('Enter month of birth: ')
-            yr = input('Enter year of birth: ')
+            dn = int(input('Enter day of birth: '))
+            mn = int(input('Enter month of birth: '))
+            yr = int(input('Enter year of birth: '))
             newdoj = dateval(dn,yr,mn)
-            while len(newdoj) != 10:
-                print(newdoj)
+            while newdoj == 0:
                 print('Please enter Correct Data of Joining')
                 return
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
             if ch == 'Y' or ch == 'y':
-                arr[5] = newdoj
+                arr[4] = newdoj
                 print('DATE OF JOINING UPDATED SUCCESSFULLY!\n')
             else:
                 print('DATE OF JOINING NOT UPDATED!\n')
@@ -618,7 +616,7 @@ def empcode():
     return(code)
 
 # Validation for inputted date
-def dateval(day,month,year):
+def dateval(day,year,month):
     # Input Day
     d = day
     # Input Month
@@ -637,10 +635,13 @@ def dateval(day,month,year):
             maxd = 28
     if maxd == 0:
         print('Please input valid Month')
+        return 0
     elif d < 1 or d > maxd:
         print('Please input valid Day')
-    elif y < 1950 and y > 2001:
+        return 0
+    elif y < 1950 or y > 2001:
         print('Please input valid Year between 1950 and 2001')
+        return 0
     else:
         if len(str(m)) == 1:
             m = '0' +  str(m)
