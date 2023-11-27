@@ -1,66 +1,74 @@
 from os import remove, rename
     # Addition of records for New Employees in Employee File
-def addrec(file_name,n,name,g,dy,mn,yr,dg,sal,phone,mbn,ads):
+def addrec(file_name):
     p = []
     no = empcode()    
     fout = open(file_name, 'a')
     count=0
+    # Input Number of Employees
+    n = int(input('Number of Employees to be added? '))
     for no in range(n):
         no = no + 1
         while True:
             # Input Employee Name
-            na = name[count]
+            na = input('Employee Name? ')
             if not na.isalnum() or na.isdigit():
                 print('Please enter proper Employee Name')
-                return
+                exit(0)
             elif na.isalpha() and len(na) <= 2 :
                 print('Please enter proper Employee Name')
-                return
+                exit(0)
             else:
                 break
         # Input Employee Gender
-        gender = g[count]
+        gender = input("Gender? ")
         while True:
             if not gender.isalpha():
                 print('Please enter Gender as either F- Female or M- Male')
-                return
+                exit(0)
             elif gender.isalpha() and len(gender) != 1 :
                 print('Please enter Gender as either F- Female or M- Male')
-                return
+                exit(0)
             elif gender.upper() != 'F' and gender.upper() != 'M' :
                 print('Please enter Gender as either F- Female or M- Male')
-                return
+                exit(0)
             else:
                 break
         # Input Date of Birth details
         print('Enter Employee Date of Birth details')
-        dob = dateval(dy[count],mn[count],yr[count])
+        dy = input('Enter day of birth: ')
+        mn = input('Enter month of birth: ')
+        yr = input('Enter year of birth: ')
+        dob = dateval(dy, mn, yr)
         if len(dob) != 10:
             print(dob)
             print('Please enter Correct Date of Birth')
-            return
+            exit(0)
         # Input Date of Joining details
         print('Enter Employee Date of Joining details')
-        doj = dateval()
+        dy1 = input('Enter day of birth: ')
+        mn1 = input('Enter month of birth: ')
+        yr1 = input('Enter year of birth: ')
+        doj = dateval(dy1, mn1, yr1)
         if len(doj) != 10:
             print(doj)
             print('Please enter Correct Date of Joining')
-            return
+            exit(0)
         # Input the Employee's Designation
-        des = dg[count]
+        des = input('Enter Employee Designation: ')
         # Input Basic Salary
-        bs = sal[count]
+        bs = input('Enter Basic Salary: ')
         # Input the Employee's Phone number
-        pn = phone[count]
+        pn = input('Enter Phone Number: ')
         validphone = phonevalidate(pn,file_name)
         if len(pn) == 10:
             if validphone == 1:
                 print('Please enter New Phone Number as it already exists')
-                return
+                exit(0)
             while True:
                 if pn in p:
                     print('Please enter New Phone Number as it already exists')
-                    return
+                    exit(0)
                 else:
                     p += [pn]
                     break
@@ -68,9 +76,9 @@ def addrec(file_name,n,name,g,dy,mn,yr,dg,sal,phone,mbn,ads):
             print('Please enter New Phone Number with 10 digits')
             return
         # Input the Employee's Mobile number                
-        mob = mbn[count]
+        mob = input('Enter Mobile Number: ')
         # Input the Employee's Address
-        add = ads[count]
+        add = input('Enter Address: ')
 
         data = str(no) +  ',' +  na.upper() +  ',' +  gender.upper() +  ',' +  dob +  ',' +  doj +  ',' +  des.upper() +  ',' +  bs +  ',' +  str(pn) +  ',' +  mob +  ',' +  add.upper() +  '\n'
         fout.write(data)
@@ -78,11 +86,11 @@ def addrec(file_name,n,name,g,dy,mn,yr,dg,sal,phone,mbn,ads):
     fout.close()
 
 # Modification in Basic Salary
-def modif1(file_name,ttfile,d,i,c):
+def modif1(file_name,ttfile):
     fin = open(file_name, 'r')
     fout = open(ttfile , 'w')
-    desig = d
-    inc = i
+    desig = input('Designation to change Basic Salary? ')
+    inc = int(input('Increment in Basic Salary? '))
     found = 0
     for data in fin:
         data = data.strip()
@@ -90,7 +98,7 @@ def modif1(file_name,ttfile,d,i,c):
         if arr[5] == desig.upper():
             found = 1
             print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
-            ch = c
+            ch = input('Enter your Choice [Y/y or N/n]? ')
             if ch == 'Y' or ch == 'y':
                 arr[6] = str(int(arr[6]) + inc)
                 print('BASIC SALARY UPDATED SUCCESSFULLY!\n')
@@ -139,10 +147,10 @@ def modif2(file_name,ttfile,n,dg,sal,cnf):
             rename(ttfile, file_name)
 
 # Modification in Gender
-def modif3():
-    fin = open('employee_file.txt', 'r')
-    fout = open('temporary.txt', 'w')
-    no = input('Employee Number to change Gender? ')
+def modif3(file_name,ttfile,empn,g,cnf):
+    fin = open(file_name, 'r')
+    fout = open(ttfile, 'w')
+    no = empn
     found = 0
     for data in fin:
         data = data.strip()
@@ -151,12 +159,12 @@ def modif3():
             found = 1
             print('Name :', arr[1])
             print('Gender:', arr[2])
-            gender = input('Gender [F/M]? ')
+            gender = g
             while gender.upper() != 'F' and gender.upper() != 'M':
                 print('Please enter Gender as either F- Female or M- Male')
-                gender = input('Gender [F/M]? ')
+                exit(0)
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
-            ch = input('Enter your Choice [Y/y or N/n]? ')
+            ch = cnf
             if ch == 'Y' or ch == 'y':
                 arr[2] = gender.upper()
                 print('GENDER UPDATED!\n')
@@ -167,15 +175,15 @@ def modif3():
     fin.close()
     fout.close()
     if found == 1:
-        remove('employee_file.txt')
-        rename('temporary.txt', 'employee_file.txt')
+        remove(file_name)
+        rename(ttfile,file_name)
 
 # Modification in Date of Birth
-def modif4():
-    fin = open('employee_file.txt', 'r')
-    fout = open('temporary.txt', 'w')
+def modif4(file_name,ttfile,empn,dn,yr,mn,cnf):
+    fin = open(file_name, 'r')
+    fout = open(ttfile, 'w')
     # Input Employee Number
-    no = input('Employee Number to change Date of Birth? ')
+    no = empn
     found = 0
     for data in fin:
         data = data.strip()
@@ -185,13 +193,13 @@ def modif4():
             print('Name :', arr[1])
             print('Date of Birth:', arr[3])
             print('Enter a Correct Data of Birth')
-            newdob = dateval()
+            newdob = dateval(dn,yr,mn)
             while len(newdob) != 10:
                 print(newdob)
                 print('Please enter Correct Date of Birth')
-                newdob = dateval()
+                exit(0)
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
-            ch = input('Enter your Choice [Y/y or N/n]? ')
+            ch = cnf
             if ch == 'Y' or ch == 'y':
                 arr[4] = newdob
                 print('DATE OF BIRTH UPDATED SUCCESSFULLY!\n')
@@ -203,8 +211,8 @@ def modif4():
         print('\nERROR: EMPLOYEE NUMBER NOT FOUND!\n')
     fin.close()
     fout.close()
-    remove('employee_file.txt')
-    rename('temporary.txt', 'employee_file.txt')
+    remove(file_name)
+    rename(ttfile, file_name)
 
 # Modification in Date of Joining
 def modif5():
