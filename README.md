@@ -82,6 +82,6 @@ We have written a total of 21 test cases to test the 5 functions.
 ![Alt text](images/tests.png)
 ### Contributions
 
-Chinmay - Setup the various tools and libraries for testing the code, created the data flow graphs, test requirements and wrote half of the unit tests.
+Chinmay - Wrote the base code and refactored it appropriately to make it suitable for testing. Setup various tools and libraries for generating CFGs from the source code, identified defs and uses and generated du-path test requirements using the tool.
 
-Darshak - Wrote the base code and refactored it appropriately to make it suitable for testing,wrote half of the unit tests and prepared the report.
+Darshak - Wrote the base code and refactored it appropriately to make it suitable for testing,setup pytest library, wrote test cases for all du paths from the given test requirements and prepared the report.
