@@ -128,7 +128,7 @@ def modif2(file_name,ttfile):
                 newbs = input('New Basic Salary? ')
                 while not newdes.isalpha() or not newbs.isdigit():
                     print('Please enter proper Designation and Basic Salary')
-                    exit(0)
+                    return
                 print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
                 ch = input('Enter your Choice [Y/y or N/n]? ')
                 if ch == 'Y' or ch == 'y':
@@ -162,7 +162,7 @@ def modif3(file_name,ttfile):
             gender = input('New Gender? ')
             while gender.upper() != 'F' and gender.upper() != 'M':
                 print('Please enter Gender as either F- Female or M- Male')
-                exit(0)
+                return
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
             if ch == 'Y' or ch == 'y':
@@ -200,7 +200,7 @@ def modif4(file_name,ttfile):
             while len(newdob) != 10:
                 print(newdob)
                 print('Please enter Correct Date of Birth')
-                exit(0)
+                return
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
             if ch == 'Y' or ch == 'y':
@@ -239,7 +239,7 @@ def modif5(file_name,ttfile):
             while len(newdoj) != 10:
                 print(newdoj)
                 print('Please enter Correct Data of Joining')
-                exit(0)
+                return
             print('Are you sure you want to change?\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
             if ch == 'Y' or ch == 'y':
@@ -445,7 +445,7 @@ def mpayfile(file_name):
                 mon_sal = (act_basic // maxdays_work) * days
             else:
                 print('Please enter valid Number of leaves')
-                exit(0)
+                return
             if days >= 0 and leaves <= days:
                 mon_sal = (act_basic // maxdays_work) * days
                 da = round(0.55 * mon_sal)

@@ -102,7 +102,7 @@ def test_modif2_yes(monkeypatch, capfd):
     modif2('test_employee_file.txt', 'test_temporary.txt')
 
     # Check the contents of the temporary file
-    with open('test_employee_file', 'r') as f:
+    with open('test_employee_file.txt', 'r') as f:
         data = f.read()
     assert '1,John,M,1990,2020,MANAGER,6000,1234567890,9876543210,123 Street\n' in data
 
