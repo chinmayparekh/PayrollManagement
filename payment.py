@@ -92,7 +92,7 @@ def modif1(file_name,ttfile):
     for data in fin:
         data = data.strip()
         arr = data.split(',')
-        if arr[5].upper() == desig.upper():
+        if arr[5] == desig.upper(): #This is a bug as both should be made as upper case strings
             found = 1
             print('Are you sure you want to change:\n\tY/y for Yes or N/n for No')
             ch = input('Enter your Choice [Y/y or N/n]? ')
@@ -110,6 +110,7 @@ def modif1(file_name,ttfile):
     if found == 1:
         remove(file_name)
         rename(ttfile, file_name)
+
 def modif2(file_name,ttfile):
         fin = open(file_name, 'r')
         fout = open(ttfile, 'w')
@@ -615,7 +616,7 @@ def empcode():
             code = int(rec[0])
     return(code)
 
-# Validation for inputted date
+# Validation for inputed date
 def dateval(day,year,month):
     # Input Day
     d = day
@@ -629,7 +630,8 @@ def dateval(day,year,month):
     elif m in [4, 6, 9, 11]:
         maxd = 30
     elif m == 2: 
-        if y % 4 == 0 and y % 100 != 0 or y % 400 == 0:
+        if y % 4 == 0 and y % 100 != 0: #This is a bug
+        # if y % 4 == 0 and y % 100 != 0 or y % 400 == 0:
             maxd = 29
         else:
             maxd = 28

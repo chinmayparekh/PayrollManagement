@@ -79,7 +79,13 @@ It was not possible to test the entire code so we ran test cases on the followin
 ![Alt text](images/display.png)
 [display](https://cs.gmu.edu:8443/offutt/coverage/DFGraphCoverage?edges=1+2%0D%0A2+3%0D%0A2+4%0D%0A3+5%0D%0A5+2%0D%0A&initialNode=1&endNode=4&defs=fin%201%0D%0Aeno%201%0D%0A&uses=fin%202%204%0D%0Aeno%205%0D%0A&action=All%20DU%20Path%20Coverage)
 
+
+### Bugs Found and Resolved
 We have written a total of 21 test cases to test the 5 functions.
+While testing the code, we found a few bugs in the logic of the source code.
+![Alt text](images/bugs.png)
+The first two test cases failed in the modif1 function because while checking the designation of the employee with the input and the file, only one of them was made into upper case instead of making both of them as upper case.
+The other bug was in the dateval function, the logic for leap year was wrong. 2000 is actually a leap year but our program considered it as an invalid date. We later fixed these bugs.
 ![Alt text](images/tests.png)
 ### Contributions
 

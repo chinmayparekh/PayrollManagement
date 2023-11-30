@@ -394,7 +394,7 @@ def test_dateval(capfd):
     # Test valid dates
     assert dateval(1, 2000, 1) == '01-01-2000'
     assert dateval(31, 2000, 1) == '31-01-2000'
-    assert dateval(29, 2000, 2) == '29-02-2000'
+    assert dateval(29, 2000, 2) == '29-02-2000' #This is a bug as 29-02-2000 is a valid date
     assert dateval(30, 2000, 4) == '30-04-2000'
 
     # Test invalid month
@@ -415,10 +415,9 @@ def test_dateval(capfd):
 
     # Test leap year
     assert dateval(29, 1996, 2) == '29-02-1996'
-    assert dateval(29, 1900, 2) == 0
+    assert dateval(29, 2100, 2) == 0
     out, err = capfd.readouterr()
     assert 'Please input valid Day' in out
-import re
 
 def test_display_emp_valid_file(capfd):
     # Assuming valid_employee_file.txt exists and contains valid data
